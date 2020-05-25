@@ -1,7 +1,11 @@
 package co.at.sdt.herb.kotlin.aquarium
 
 fun main() {
-    println(getFortuneCookie())
+    for (i in 1..10) {
+        val fortune = getFortuneCookie()
+        println(fortune)
+        if (fortune.startsWith("Take it easy")) break
+    }
 }
 
 fun getFortuneCookie(): String {
