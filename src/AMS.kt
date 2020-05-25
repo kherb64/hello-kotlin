@@ -1,5 +1,19 @@
 package co.at.sdt.herb.kotlin.aquarium
 
-fun main () {
-    println("Hello, world!")
+import java.util.*
+
+fun main(args: Array<String>) {
+    println("Hello, ${args[0]}!")
+    feedTheFish()
+}
+
+fun feedTheFish() {
+    val day = randomDay()
+    val food = "pellets"
+    println("Today is $day and the fish eat $food")
+}
+
+fun randomDay(): String {
+    val week = listOf("Monday", "TuesDay", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    return week[Random().nextInt(7)]
 }
