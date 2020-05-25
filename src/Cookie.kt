@@ -2,13 +2,18 @@ package co.at.sdt.herb.kotlin.aquarium
 
 fun main() {
     for (i in 1..10) {
-        val fortune = getFortuneCookie()
+        val fortune = getFortuneCookie(getBirthday())
         println(fortune)
         if (fortune.startsWith("Take it easy")) break
     }
 }
 
-fun getFortuneCookie(): String {
+private fun getBirthday(): Int {
+    print("Enter your birthday: ")
+    return readLine()?.toIntOrNull() ?: 1
+}
+
+fun getFortuneCookie(birthday: Int): String {
     val fortunes = listOf(
         "You will have a great day!",
         "Things will go well for you today.",
@@ -18,7 +23,10 @@ fun getFortuneCookie(): String {
         "Take it easy and enjoy life!",
         "Treasure your friends because they are your greatest fortune."
     )
-    print("Enter your birthday: ")
-    val birthday: Int = readLine()?.toIntOrNull() ?: 1
-    return fortunes[birthday.rem(7)]
+    val i = when (birthday) {
+        28, 31 -> 6
+        in 1..7 -> 0
+        else -> birthday.rem(fortunes.size)
+    }
+    return fortunes[i]
 }
