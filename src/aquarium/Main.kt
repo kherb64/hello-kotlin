@@ -17,6 +17,8 @@ private fun buildAquarium() {
     val smallAquarium2 = Aquarium(numberOfFish = 9)
     printAquarium(smallAquarium2, "Small aquarium2")
 
+    val tower = TowerTank(25, 30)
+    printAquarium(tower)
 }
 
 fun printAquarium (aquarium: Aquarium, name:String = "") {
