@@ -6,17 +6,24 @@ fun main(args: Array<String>) {
 
 private fun buildAquarium() {
     val myAquarium = Aquarium()
-    println(
-        "length: ${myAquarium.length}"
-                + " width: ${myAquarium.width}"
-                + " height: ${myAquarium.height}"
-    )
-    println("volume: ${myAquarium.volume} liters")
+    printAquarium(myAquarium)
 
     myAquarium.height = 80
-    println("height: ${myAquarium.height}")
-    println("volume: ${myAquarium.volume} liters")
+    printAquarium(myAquarium)
 
-    myAquarium.volume = 100
-    println("height: ${myAquarium.height}")
+    val smallAquarium = Aquarium(20, 15, 30)
+    printAquarium(smallAquarium, "Small aquarium")
+
+    val smallAquarium2 = Aquarium(numberOfFish = 9)
+    printAquarium(smallAquarium2, "Small aquarium2")
+
+}
+
+fun printAquarium (aquarium: Aquarium, name:String = "") {
+    println(
+        "$name volume: ${aquarium.volume} liters"
+                + " with length: ${aquarium.length}"
+                + " width: ${aquarium.width}"
+                + " height: ${aquarium.height}"
+    )
 }
