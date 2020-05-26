@@ -1,10 +1,12 @@
 package co.at.sdt.herb.kotlin.aquarium
 
 fun main() {
-    for (i in 1..10) {
-        val fortune = getFortuneCookie(getBirthday())
+    var fortune = ""
+    var i = 0
+    while (i < 10 && !fortune.startsWith("Take it easy")) {
+        i++
+        fortune = getFortuneCookie(getBirthday())
         println(fortune)
-        if (fortune.startsWith("Take it easy")) break
     }
 }
 
