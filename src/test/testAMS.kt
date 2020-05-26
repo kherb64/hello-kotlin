@@ -1,6 +1,4 @@
-package co.at.sdt.herb.kotlin.aquarium.test
-
-import co.at.sdt.herb.kotlin.aquarium.canAddFish
+package co.at.sdt.herb.kotlin
 
 fun main() {
     testCanAddFish()

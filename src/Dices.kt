@@ -1,4 +1,4 @@
-package co.at.sdt.herb.kotlin.aquarium
+package co.at.sdt.herb.kotlin
 
 import java.util.*
 
