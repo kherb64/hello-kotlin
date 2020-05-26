@@ -41,3 +41,14 @@ fun randomDay(): String {
     val week = listOf("Monday", "TuesDay", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
     return week[Random().nextInt(7)]
 }
+
+fun canAddFish(
+    tankSize: Double, // gallons
+    currentFish: List<Int>, // list of current fish sizes
+    fishSize: Int = 2, // size in inches of fish to add
+    hasDecorations: Boolean = true
+): Boolean {
+    val totalLength = currentFish.sum()
+    val decoFactor = if (hasDecorations) 0.8 else 1.0
+    return totalLength + fishSize <= tankSize * decoFactor
+}
