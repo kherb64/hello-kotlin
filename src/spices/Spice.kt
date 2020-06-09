@@ -1,6 +1,6 @@
 package co.at.sdt.herb.kotlin.spices
 
-abstract class Spice(
+sealed class Spice(
     val name: String,
     val spiciness: String = "mild",
     color: SpiceColor
@@ -38,23 +38,27 @@ class Curry(spiciness: String, color: SpiceColor = YellowSpiceColor) :
     }
 }
 
+enum class Color(val rgb: Int) {
+    RED(0xFF0000), GREEN(0x00FF00), BLUE(0x0000FF), YELLOW(0xFFFF00);
+}
+
 interface SpiceColor {
-    val color: String
+    val color: Color
 }
 
 object GreenSpiceColor : SpiceColor {
-    override val color: String = "green"
+    override val color: Color = Color.GREEN
 }
 
 object RedSpiceColor : SpiceColor {
-    override val color: String = "red"
+    override val color: Color = Color.RED
 }
 
 object YellowSpiceColor : SpiceColor {
-    override val color: String = "yellow"
+    override val color: Color = Color.YELLOW
 }
 
-data class SpiceContainer (val spice: Spice) {
+data class SpiceContainer(val spice: Spice) {
     val label = "${spice.color} ${spice.name} ${spice.spiciness} ${spice.heat}"
 }
 
@@ -62,8 +66,10 @@ fun main() {
     val curry = Curry("hot")
     curry.prepareSpice()
 
-    val spiceCabinet = listOf(SpiceContainer(Curry("mild")),
+    val spiceCabinet = listOf(
+        SpiceContainer(Curry("mild")),
         SpiceContainer(Curry("medium", RedSpiceColor)),
-        SpiceContainer(Curry("spicy", GreenSpiceColor)))
-    for(element in spiceCabinet) println(element.label)
+        SpiceContainer(Curry("spicy", GreenSpiceColor))
+    )
+    for (element in spiceCabinet) println(element.label)
 }
