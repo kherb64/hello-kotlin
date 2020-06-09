@@ -42,11 +42,28 @@ interface SpiceColor {
     val color: String
 }
 
+object GreenSpiceColor : SpiceColor {
+    override val color: String = "green"
+}
+
+object RedSpiceColor : SpiceColor {
+    override val color: String = "red"
+}
+
 object YellowSpiceColor : SpiceColor {
     override val color: String = "yellow"
+}
+
+data class SpiceContainer (val spice: Spice) {
+    val label = "${spice.color} ${spice.name} ${spice.spiciness} ${spice.heat}"
 }
 
 fun main() {
     val curry = Curry("hot")
     curry.prepareSpice()
+
+    val spiceCabinet = listOf(SpiceContainer(Curry("mild")),
+        SpiceContainer(Curry("medium", RedSpiceColor)),
+        SpiceContainer(Curry("spicy", GreenSpiceColor)))
+    for(element in spiceCabinet) println(element.label)
 }
