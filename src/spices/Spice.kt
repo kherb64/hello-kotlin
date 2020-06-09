@@ -1,6 +1,11 @@
 package co.at.sdt.herb.kotlin.spices
 
-class Spice(val name: String, val spiciness: String = "mild") {
+abstract class Spice(
+    val name: String,
+    val spiciness: String = "mild",
+    color: SpiceColor
+) :
+    SpiceColor by color {
     val heat: Int
         get() = when (spiciness) {
             "mild" -> 1
@@ -10,23 +15,38 @@ class Spice(val name: String, val spiciness: String = "mild") {
             "very hot" -> 10
             else -> 0
         }
+
     init {
-        println("$name $spiciness $heat")
+        println("${color.color} $name $spiciness $heat")
+    }
+
+    abstract fun prepareSpice()
+}
+
+interface Grinder {
+    fun grind() {
+        println("grinding")
     }
 }
 
-fun makeSalt() { Spice("salt")}
+class Curry(spiciness: String, color: SpiceColor = YellowSpiceColor) :
+    Spice("curry", spiciness, color),
+    Grinder {
+
+    override fun prepareSpice() {
+        grind()
+    }
+}
+
+interface SpiceColor {
+    val color: String
+}
+
+object YellowSpiceColor : SpiceColor {
+    override val color: String = "yellow"
+}
 
 fun main() {
-    val spices = listOf(
-        Spice("curry", "mild"),
-        Spice("pepper", "medium"),
-        Spice("cayenne", "spicy"),
-        Spice("ginger", "mild"),
-        Spice("red curry", "medium"),
-        Spice("green curry", "mild"),
-        Spice("hot pepper", "very hot")
-    )
-
-    val salt = makeSalt()
+    val curry = Curry("hot")
+    curry.prepareSpice()
 }

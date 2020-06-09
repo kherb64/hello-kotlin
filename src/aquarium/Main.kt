@@ -2,6 +2,7 @@ package co.at.sdt.herb.kotlin.aquarium
 
 fun main(args: Array<String>) {
     buildAquarium()
+    makeFish()
 }
 
 private fun buildAquarium() {
@@ -28,4 +29,18 @@ fun printAquarium (aquarium: Aquarium, name:String = "") {
                 + " width: ${aquarium.width}"
                 + " height: ${aquarium.height}"
     )
+}
+
+fun makeFish() {
+    val shark = Shark()
+    val pleco = Plecostomus()
+    println("Shark ${shark.color}\nPlecostomus ${pleco.color}")
+
+    shark.eat()
+    pleco.eat()
+}
+
+fun feedFish(fish: FishAction) {
+    // make some food
+    fish.eat()
 }
