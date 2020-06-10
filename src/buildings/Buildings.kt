@@ -11,7 +11,7 @@ class Brick(): BaseBuildingMaterial() {
     override val numberNeeded = 8
 }
 
-class Building<T: BaseBuildingMaterial>(val material: T) {
+class Building<out T: BaseBuildingMaterial>(val material: T) {
     val baseMaterialsNeeded = 100
     val actualMaterialsNeeded = baseMaterialsNeeded * material.numberNeeded
 
