@@ -45,12 +45,12 @@ class LakeWaterCleaner : Cleaner<LakeWater> {
     }
 }
 
-fun addItemTo(aquarium: Aquarium<WaterSupply>) {
-    println("item added to ${aquarium.waterSupply::class.simpleName} ${aquarium::class.simpleName}")
+fun Aquarium<*>.addItemTo() {
+    println("item added to ${this.waterSupply::class.simpleName} ${this::class.simpleName}")
 }
 
-fun <T : WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
-    println("${aquarium.waterSupply::class.simpleName} aquarium needs processing: ${aquarium.waterSupply.needProcessing}")
+fun Aquarium<*>.isWaterClean() {
+    println("${this.waterSupply::class.simpleName} aquarium needs processing: ${this.waterSupply.needProcessing}")
 }
 
 inline fun <reified R : WaterSupply> Aquarium<*>.hasWaterSupplyOfType() = this is R
@@ -62,16 +62,16 @@ fun genericExample() {
     println("${aquarium.hasWaterSupplyOfType<TapWater>()}")
     println("${aquarium.waterSupply.isOfType<LakeWater>()}")
     println("${aquarium.waterSupply.type()}")
-    isWaterClean(aquarium)
+    aquarium.isWaterClean()
     aquarium.addWater(TapWaterCleaner())
-    isWaterClean(aquarium)
-    addItemTo(aquarium)
+    aquarium.isWaterClean()
+    aquarium.addItemTo()
 
     val aquarium2 = Aquarium(LakeWater())
-    isWaterClean(aquarium2)
+    aquarium.isWaterClean()
     aquarium2.addWater(LakeWaterCleaner())
-    isWaterClean(aquarium2)
-    addItemTo(aquarium2)
+    aquarium.isWaterClean()
+    aquarium2.addItemTo()
 }
 
 fun main() {
