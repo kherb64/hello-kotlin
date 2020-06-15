@@ -25,8 +25,6 @@ class Game(val location: Location) {
     val end = {
         path.add(Directions.END)
         println("Game over")
-        println(path)
-        path.clear()
     }
 
     fun makeMove(command: String?) {
@@ -37,6 +35,7 @@ class Game(val location: Location) {
             "w" -> move(west)
             else -> move(end)
         }
+        println("path $path")
     }
 }
 
@@ -53,24 +52,23 @@ class Location(private val width: Int = 4, private val height: Int = 4) {
         }
     }
 
-    var currentWidth = 0
-    var currentHeight = 0
+    private var curLoc = Pair(0, 0) // currentLocation: width, height
 
     fun updateLocation(move: Directions) {
         when (move) {
-            Directions.NORTH -> currentHeight = (height + currentHeight + 1).rem(height)
-            Directions.SOUTH -> currentHeight = (height + currentHeight - 1).rem(height)
-            Directions.EAST -> currentWidth = (width + currentWidth + 1).rem(width)
-            Directions.WEST -> currentWidth = (width + currentWidth - 1).rem(width)
+            Directions.NORTH -> curLoc = Pair(curLoc.first, (height + curLoc.second + 1).rem(height))
+            Directions.SOUTH -> curLoc = Pair(curLoc.first, (height + curLoc.second - 1).rem(height))
+            Directions.EAST -> curLoc = Pair((width + curLoc.first + 1).rem(width), curLoc.second)
+            Directions.WEST -> curLoc = Pair((width + curLoc.first - 1).rem(width), curLoc.second)
             else -> {
             }
         }
-        println("location ${map[currentWidth][currentHeight]}")
+        println("location ${map[curLoc.first][curLoc.second]}")
     }
 }
 
 fun main() {
-    val game = Game(Location(8,8))
+    val game = Game(Location(8, 8))
     println(game.path)
     /* game.north()
     game.east()
@@ -79,7 +77,5 @@ fun main() {
     game.end() */
     while (!game.path.contains(Directions.END)) {
         game.makeMove(readLine())
-        println(game.path)
     }
-    println(game.path)
 }
