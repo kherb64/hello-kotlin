@@ -25,8 +25,6 @@ class Game(val location: Location) {
     val end = {
         path.add(Directions.END)
         println("Game over")
-        println(path)
-        path.clear()
     }
 
     fun makeMove(command: String?) {
@@ -37,6 +35,7 @@ class Game(val location: Location) {
             "w" -> move(west)
             else -> move(end)
         }
+        println("path $path")
     }
 }
 
@@ -79,7 +78,5 @@ fun main() {
     game.end() */
     while (!game.path.contains(Directions.END)) {
         game.makeMove(readLine())
-        println(game.path)
     }
-    println(game.path)
 }
